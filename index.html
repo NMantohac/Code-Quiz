@@ -11,7 +11,73 @@
     <title>Code Quiz</title>
   </head>
   <body>
-    
+    <div class="wrapper">
+      <nav>
+        <ul class="nav" id="view-highscores">
+          <li class="nav-item">
+            <a class="nav-link active" href="./index-highscores.html">View Highscores</a>
+          </li>
+          <li class="nav-item ml-auto" id="timer">
+            Time: <span id="time">0</span>
+          </li>
+        </ul>
+      </nav>
+
+      <header>
+        <h1 id="quiz-title">Video Game Quiz Challenge</h1>
+      </header>
+
+      <main>
+          <div id="start-screen">
+            <div class="card">
+              <div class="card-header" id="start-screen-header">
+                <h2>Test Your Knowledge on Video Games!</h2>
+              </div>
+
+              <div class="card-body" id="start-screen-body"> 
+                <p>Try to answer the following 10 videogame-related questions within the time limit. Keep in mind that incorrect answers
+                  will penalize your score/time by 10 seconds!</p>
+              </div>
+
+              <div class="card-footer" id="start-screen-footer">
+                <button id="start-button">Start Quiz</button>
+              </div>
+            </div>
+          </div>
+        
+          <div class="hide" id="questions">
+            <div class="card">
+              <div class="card-header" id="question-title-header">
+                <h2 id="question-title"></h2>
+              </div>
+              <div class="card-body" id="question-choices-body">
+                <div id="question-choices">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hide" id="end-screen">
+            <div class="card">
+              <div class="card-header" id="end-screen-header">
+                <h2 id="end-screen-title"></h2>
+              </div>
+
+              <div class="card-body" id="end-screen-body">
+                <p>Final Score: <span id="final-score"></span></p>
+                Enter Username:
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Submit</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    </main>
 
     <script src="./assets/javascript/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
