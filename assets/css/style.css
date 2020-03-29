@@ -21,13 +21,13 @@ body {
 }
 
 nav #view-highscores {
-    margin-top: -28px;
-    margin-left: -25px;
+   margin-top: -20px;
+   text-align: center;
 }
 
-nav #timer {
-    padding: 7px;
-    margin-right: -10px;
+#timer {
+    display: none;
+    text-align: center;
 }
 
 header {
@@ -42,7 +42,7 @@ header {
 }
   
 #start-screen,
-#questions,
+#question-screen,
 #end-screen,
 #highscores-screen {
     max-width: 800px;
@@ -78,10 +78,24 @@ header {
     text-align: center;
 }
 
-#questions {
+#question-screen {
     display: none;
 }
 
+.button-choices {
+    /* color: blue; */
+    margin-bottom: 20px;
+}
+
+#final-score {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 #end-screen {
+    display: none;
+}
+
+#highscores-screen {
     display: none;
 }
