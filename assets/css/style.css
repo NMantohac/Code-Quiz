@@ -14,7 +14,6 @@ body,
 body {
     font-family: sans-serif;
     background-color: lightgray;
-    /* background-image: ; */
 }
 
 .wrapper {
@@ -115,6 +114,11 @@ nav #view-highscores-button {
 
 #end-screen {
     display: none;
+    margin-top: 30px;
+}
+
+#end-screen-title {
+    font-size: 50px;
 }
 
 #final-score {

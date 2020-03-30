@@ -16,11 +16,9 @@ const $highscoresBody = $("#highscores-screen-body");
 const $goBackBtn = $("#go-back-button");
 const $clearBtn = $("#clear-button");
 
- // Set Time
  let totalTime = 120;
  let quizTime = 0;
 
- // Set Scores
  let correct = 0;
  let wrong = 0;
 
@@ -75,7 +73,6 @@ function quizGame() {
         if ($(event.target).html() === answer) {
             event.target.style.backgroundColor = '#164032';
             correct++;
-            // console.log("Correct Answer!");
             setTimeout(function() {
                 $questionCard.empty();
                 if (questions.length !== 0) {
@@ -93,7 +90,6 @@ function quizGame() {
             event.target.style.borderColor = '#e53935';
             event.target.style.backgroundColor = '#661917';
             wrong++;
-            // console.log("Wrong Answer!");
             setTimeout(function() {
             totalTime -= 20;
             if (totalTime <= 0) {
@@ -123,7 +119,6 @@ function quizGame() {
     };
 
     function showEndScore() {
-        $highscoresBtn.hide();
         $questionScreen.hide();
         $timer.hide();
         $endScreen.show();
