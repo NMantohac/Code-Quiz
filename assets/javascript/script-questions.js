@@ -5,7 +5,7 @@ const questions = [
         answer: "Nintendo GameCube"
     },
     {
-        title: "Which of these characters is a Nintendo mascot?",
+        title: "Which of these characters IS a Nintendo mascot?",
         choices: ["Sonic the Hedgehog", "Master Chief", "Crash Bandicoot", "Donkey Kong", "Mega Man"],
         answer: "Donkey Kong"
     },
@@ -25,7 +25,7 @@ const questions = [
         answer: "Bayonetta"
     },
     {
-        title: "Which of these popular indie game titles is known for its unique enemies/bosses with distinctive personality traits?",
+        title: "Which of these popular indie game titles IS known for its unique enemies/bosses with distinctive personality traits?",
         choices: ["INSIDE", "Super Meat Boy", "Braid", "Stardew Valley", "Undertale"],
         answer: "Undertale"
     },
@@ -45,7 +45,7 @@ const questions = [
         answer: "Dark Souls 3"
     },
     {
-        title: "Reboots/Remakes/Remastered Versions of past videogame titles/series has become a norm in the current era of gaming. Which of these games serves as a REMAKE of a past title that was first released in the PS2?",
+        title: "Reboots/Remakes/Remastered Versions of past videogame titles or series has become a norm in the current era of gaming. Which of these games serves as a REMAKE of a past title that was first released in the PS2?",
         choices: ["Shadow of the Colossus (2018)", "Prey (2017)", "Resident Evil 2 (2019)", "Killer Instinct (2013)", "Tomb Raider (2013)"],
         answer: "Shadow of the Colossus (2018)"
     },

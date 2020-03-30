@@ -1,6 +1,6 @@
-/* * {
+* {
     box-sizing: border-box;
-} */
+}
 
 html,
 body,
@@ -8,6 +8,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: auto;
 }
 
 body {
@@ -18,27 +19,46 @@ body {
 
 .wrapper {
     padding: 30px 20px 0px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    transition: 1s linear;
 }
 
-nav #view-highscores {
-   margin-top: -20px;
+nav #view-highscores-button {
+   margin-top: -10px;
+   margin-bottom: 20px;
    text-align: center;
+   font-size: 24px;
+   border: 1px solid rgb(240, 114, 114);
 }
 
 #timer {
     display: none;
+    width: 58%;
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 50px;
     text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+    color: ghostwhite;
+    background: rgb(75, 72, 72);
+    border: 1px solid lightskyblue;
 }
 
-header {
+
+#quiz-title {
     width: 75%;
     margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin-bottom: 50px;
+    padding: 5px;
     text-align: center;
     text-decoration: underline;
-    color: black;
-    /* border: 3px solid black; */
+    color: ghostwhite;
+    background: rgb(75, 72, 72);
+    border: 1px solid lightskyblue;
 }
   
 #start-screen,
@@ -47,24 +67,27 @@ header {
 #highscores-screen {
     max-width: 800px;
     margin: 0 auto;
-    margin-top: 10px;
-    padding: 30px 40px;
+    margin-top: -30px;
+    padding: 15px 15px;
     font-size: 18px;
     border-radius: 5px;
     border-width: 1px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
-    /* background: black; */
-    /* border: 3px solid green; */
+    box-shadow: rgba(0, 0, 0, 0.15) 10px 10px 10px 10px;
+    background: rgb(75, 72, 72);
+    border: 1px solid lightskyblue;
 }
-  
+
 .card-header h2 {
+    padding: 10px;
     text-align: center;
     font-weight: bold;
+    font-size: 24px;
     color: black;
 }
 
 .card-body {
     min-height: 100px;
+    background: lightgray;
 }
   
 .card-body p {
@@ -78,17 +101,15 @@ header {
     text-align: center;
 }
 
+#start-button {
+    font-size: 20px;
+}
+
 #question-screen {
     display: none;
 }
 
 .button-choices {
-    /* color: blue; */
-    margin-bottom: 20px;
-}
-
-#final-score {
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -96,6 +117,45 @@ header {
     display: none;
 }
 
+#final-score {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
 #highscores-screen {
     display: none;
+    margin-top: 50px;
 }
+
+#go-back-button,
+#clear-button {
+    font-size: 20px;
+}
+
+.player-score {
+    float: right;
+}
+
+@keyframes cf3FadeInOut {
+    0% {
+    opacity:1;
+  }
+  45% {
+  opacity:1;
+  }
+  55% {
+  opacity:0;
+  }
+  100% {
+  opacity:0;
+  }
+  }
+  
+  #cf3 img.top {
+  animation-name: cf3FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-direction: alternate;
+  }  

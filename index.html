@@ -13,65 +13,65 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav>
-        <ul class="nav navbar-nav">
-          <li class="nav-item text-center">
-            <button class="btn btn-secondary highscores_nav" id="view-highscores-button">View Highscores</button>
-          </li>
-        </ul>
-        <div id="timer">
-          Time: <span id="time">0</span>
-        </div>
-      </nav>
-
-      <header>
-        <h1 id="quiz-title">Video Game Quiz Challenge</h1>
-      </header>
-
-      <main>
-          <div id="start-screen">
-            <div class="card">
-              <div class="card-header" id="start-screen-header">
-                <h2>Test Your Knowledge on Video Games!</h2>
-              </div>
-
-              <div class="card-body" id="start-screen-body"> 
-                <p>Try to answer the following 10 videogame-related questions within the time limit. Each question will become progressively harder to answer! Keep in mind that incorrect answers
-                  will penalize your score/time by 20 seconds!</p>
-              </div>
-
-              <div class="card-footer" id="start-screen-footer">
-                <button class="btn btn-secondary" id="start-button">Start Quiz</button>
-              </div>
-            </div>
+        <nav>
+          <ul class="nav navbar-nav">
+            <li class="nav-item text-center">
+              <button class="btn btn-dark highscores_nav" id="view-highscores-button">View Highscores</button>
+            </li>
+          </ul>
+          <div id="timer">
+            Time: <span id="time">0</span>
           </div>
-        
-          <div class="hide" id="question-screen">
-            <div class="card" id="question-card">
-            </div>
-          </div>
+        </nav>
 
-          <div class="hide" id="end-screen">
-            <div class="card" id="end-screen-card">
-            </div>
-          </div>
+        <header>
+          <h1 id="quiz-title">Video Game Quiz Challenge</h1>
+        </header>
 
-          <div id="highscores-screen">
-            <div class="card">
-                <div class="card-header" id="highscores-screen-header">
-                    <h2>Leaderboard</h2>
-                </div>
-    
-                <div class="card-body" id="highscores-screen-body"> 
+        <main>
+            <div id="start-screen">
+              <div class="card">
+                <div class="card-header" id="start-screen-header">
+                  <h2>Test Your Knowledge on Video Games!</h2>
                 </div>
 
-                <div class="card-footer" id="highscores-screen-footer">
-                  <button id="go-back-button">Go Back</button>
-                  <button id="clear-button">Clear Highscores</button>
+                <div class="card-body" id="start-screen-body"> 
+                  <p>Try to answer the following 10 videogame-related questions within the time limit. Each question will become progressively harder to answer! Keep in mind that incorrect answers
+                    will penalize your score/time by 20 seconds!</p>
                 </div>
-            </div>  
-          </div>
-      </main>
+
+                <div class="card-footer" id="start-screen-footer">
+                  <button class="btn btn-secondary" id="start-button">Start Quiz</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="hide" id="question-screen">
+              <div class="card" id="question-card">
+              </div>
+            </div>
+
+            <div class="hide" id="end-screen">
+              <div class="card" id="end-screen-card">
+              </div>
+            </div>
+
+            <div id="highscores-screen">
+              <div class="card">
+                  <div class="card-header" id="highscores-screen-header">
+                      <h2>Leaderboard</h2>
+                  </div>
+      
+                  <div class="card-body" id="highscores-screen-body"> 
+                  </div>
+
+                  <div class="card-footer" id="highscores-screen-footer">
+                    <button class="btn btn-secondary" id="go-back-button">Go Back</button>
+                    <button class="btn btn-secondary" id="clear-button">Clear Highscores</button>
+                  </div>
+              </div>  
+            </div>
+        </main>
     </div>
 
     <script src="./assets/javascript/script.js"></script>

@@ -18,7 +18,7 @@ const $clearBtn = $("#clear-button");
 
  // Set Time
  let totalTime = 120;
- let gameTime = 0;
+ let quizTime = 0;
 
  // Set Scores
  let correct = 0;
@@ -29,9 +29,9 @@ function quizGame() {
     function initialize() {
         $(document).ready(function() {
             $startBtn.on("click", startQuiz);
-            $highscoresBtn.on("click", checkRankingSubmit);
+            $highscoresBtn.on("click", viewRankings);
             $goBackBtn.on("click", goBackStart);
-            $clearBtn.on("click", clearScore);
+            $clearBtn.on("click", clearScores);
     });
     };
 
@@ -41,25 +41,24 @@ function quizGame() {
         $timer.show();
         $questionScreen.show();
 
-        displayQuestion();
+        showQuestions();
 
         $timeCount.text(totalTime);
-        stopWatch();
+        timerInterval();
     };
 
-    function displayQuestion() {
+    function showQuestions() {
         const question = questions.shift();
         const questionTitle = $(`<div class="card-header">
-                                    ${question.title}
+                                    <h2>${question.title}</h2>
                                 </div>`)
-        // console.log(question);
-
+        
         const choicesList = $(`<div class="card-body" id="question-choices>
                                <ul class="list-group">
                                </ul>
                                </div>`);
         
-        choicesList.on("click", (event) => {handleAnswerClick(event, question.answer)});
+        choicesList.on("click", (event) => {manageAnswerClick(event, question.answer)});
         
         question["choices"].forEach(choice => {
             choicesList.append(`<button type="button" class="button-choices btn btn-secondary">${choice}</button>
@@ -70,68 +69,72 @@ function quizGame() {
         $questionCard.append(choicesList);
     };
 
-    function handleAnswerClick(event, answer) {
+    function manageAnswerClick(event, answer) {
         event.preventDefault();
 
         if ($(event.target).html() === answer) {
+            event.target.style.backgroundColor = '#164032';
             correct++;
-            console.log("Correct Answer!");
+            // console.log("Correct Answer!");
             setTimeout(function() {
                 $questionCard.empty();
                 if (questions.length !== 0) {
-                    displayQuestion();
+                    showQuestions();
                 }
                 else {
-                    gameTime = totalTime;
-                    endGame();
+                    quizTime = totalTime;
+                    endQuiz();
                     $timeCount.text(totalTime);
                     totalTime = 0;
                 }
             }, 500);
         }
         else {
+            event.target.style.borderColor = '#e53935';
+            event.target.style.backgroundColor = '#661917';
             wrong++;
-            console.log("Wrong Answer!");
+            // console.log("Wrong Answer!");
             setTimeout(function() {
             totalTime -= 20;
             if (totalTime <= 0) {
                 totalTime = 0;
             }
             $questionCard.empty();
-            displayQuestion();
+            showQuestions();
             }, 500);
         }
     };
 
-    function stopWatch() {
+    function timerInterval() {
         if (totalTime === 0) {
-            endGame();
+            endQuiz();
             $timeCount.text(totalTime);
         }
         else if (totalTime > 0) {
             $timeCount.text(totalTime--);
-            setTimeout(stopWatch, 1000);
+            setTimeout(timerInterval, 1000);
         }
     };
 
-    function endGame() {
-        displayScorecard();
+    function endQuiz() {
+        showEndScore();
         const $submitBtn = $("#end-screen-submit");
-        $submitBtn.on("click", handleInputSubmit);
+        $submitBtn.on("click", manageInputSubmit);
     };
 
-    function displayScorecard() {
+    function showEndScore() {
+        $highscoresBtn.hide();
         $questionScreen.hide();
         $timer.hide();
         $endScreen.show();
         
-        var scoreCard = $endCard.html(
+        var endScoreCard = $endCard.html(
             `<div class="card-header" id="end-screen-header">
                 <h2 id="end-screen-title">Game Over!</h2>
              </div>
 
              <div class="card-body" id="end-screen-body">
-               <h3 id="final-score">Final Score: ${gameTime}</h3>
+               <h3 id="final-score">Final Score: ${quizTime}</h3>
                <p>Correct Answers: ${correct}</p>
                <p>Wrong Answers: ${wrong}</p>
                <p>Overall Percent: ${((correct / "10") * 100).toFixed(0)}%</p>  
@@ -140,38 +143,39 @@ function quizGame() {
                <div class="input-group mb-3">
                  <input type="text" class="form-control player" id="end-screen-input" placeholder="Username/Initials" aria-label="Recipient's username" aria-describedby="basic-addon2">
                  <div class="input-group-append">
-                   <button class="btn btn-outline-secondary" id="end-screen-submit" type="button">Submit</button>
+                   <button class="btn btn-dark" id="end-screen-submit" type="button">Submit</button>
                  </div>
                </div>
              </div>`);
         
-        $endCard.prepend(scoreCard);
+        $endCard.prepend(endScoreCard);
     }
 
-    function handleInputSubmit(event) {
+    function manageInputSubmit(event) {
         event.preventDefault();
 
         $endScreen.hide();
+        $highscoresBtn.show();
         $highscoresScreen.show();
         
         const playerName = $(".player").val();
         const player = {
             name: playerName,
-            score: gameTime
+            score: quizTime
         }
         
-        saveToLocalStorage(player);
-        displayRankings(player);        
+        localStorageSave(player);
+        showRankings(player);        
     };
 
-    function displayRankings(currentPlayer = {}) {
-        const players = JSON.parse(localStorage.getItem("players"));
+    function showRankings(currentPlayer = {}) {
+        const playersArr = JSON.parse(localStorage.getItem("playersArr"));
         
         const playerList = $('<ul class="list-group list-group-flush"></ul>');
 
-        if (players !== null) {
-            sortArray(players);
-            players.forEach((player, index) => {
+        if (playersArr !== null) {
+            sortArray(playersArr);
+            playersArr.forEach((player, index) => {
                 if (currentPlayer.name === player.name && currentPlayer !== {}) {
                     playerList.append(`<li class="list-group-item font-weight-bold mt-1">${index + 1}. ${player.name} <span class="player-score">${player.score}</span></li>`);
                 }
@@ -185,21 +189,15 @@ function quizGame() {
 
     };
 
-    function checkRankingSubmit(event) {
-        if ($(event.target).hasClass("highscores_nav")) {
+    function viewRankings() {
             $startScreenTitle.hide();
             $startScreen.hide();
-            $highscoresScreen.show();
-            $highscoresBtn.prop("disabled", true);
-            displayRankings();
-        }
-        else {
-            endGame();
+            $questionScreen.hide()
             $endScreen.hide();
+            $timer.hide();
+            $highscoresBody.empty();
             $highscoresScreen.show();
-            $highscoresBtn.prop("disabled", true);
-            displayRankings();
-        }
+            showRankings();
     };
 
     function sortArray(arr) {
@@ -218,16 +216,16 @@ function quizGame() {
         });
     };
 
-    function saveToLocalStorage(player) {
-        if (localStorage.getItem("players") === null) {
-            const players = [];
-            players.push(player);
-            localStorage.setItem("players", JSON.stringify(players));
+    function localStorageSave(player) {
+        if (localStorage.getItem("playersArr") === null) {
+            const playersArr = [];
+            playersArr.push(player);
+            localStorage.setItem("playersArr", JSON.stringify(playersArr));
         }
         else {
-            const players = JSON.parse(localStorage.getItem("players"));
-            players.push(player);
-            localStorage.setItem("players", JSON.stringify(players));
+            const playersArr = JSON.parse(localStorage.getItem("playersArr"));
+            playersArr.push(player);
+            localStorage.setItem("playersArr", JSON.stringify(playersArr));
         }
     };
 
@@ -235,7 +233,7 @@ function quizGame() {
         window.location.href = "./index.html";
     };
 
-    function clearScore() {
+    function clearScores() {
         localStorage.clear();
         $highscoresBody.empty();
     };
@@ -245,7 +243,32 @@ function quizGame() {
 
 quizGame();
 
+const imagesArr = [
+    "./assets/images/Background-Bloodborne.jpg",
+    "./assets/images/Background-Call-of-Duty-MW2.jpg",
+    "./assets/images/Background-Crash-Bandicoot.jpg",
+    "./assets/images/Background-Dark-Souls-3.jpg",
+    "./assets/images/Background-Doom.jpg",
+    "./assets/images/Background-Final-Fantasy-XV.png",
+    "./assets/images/Background-Halo-3.jpg",
+    "./assets/images/Background-Horizon-Zero-Dawn.jpg",
+    "./assets/images/Background-Mortal-Kombat.jpg",
+    "./assets/images/Background-Persona-5.jpg",
+    "./assets/images/Background-Shadow-of-the-Colossus.jpg",
+    "./assets/images/Background-Sonic-Generations.jpg",
+    "./assets/images/Background-Tekken-7.png",
+    "./assets/images/Background-Tomb-Raider.jpg",
+    "./assets/images/Background-Undertale.jpg"
+];
 
+const $wrapper = $(".wrapper")
+let nextImage = 0;
+doSlideShow();
 
-
-
+function doSlideShow() {
+    if (nextImage >= imagesArr.length) {
+        nextImage = 0;
+    }
+    $wrapper.css("background-image", 'url("'+imagesArr[nextImage++]+'")')
+    setTimeout(doSlideShow, 8000);
+};
