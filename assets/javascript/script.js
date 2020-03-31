@@ -1,3 +1,4 @@
+// Targets DOM elements
 const $startScreen = $("#start-screen");
 const $startScreenTitle = $("#quiz-title");
 const $startBtn = $("#start-button");
@@ -16,14 +17,17 @@ const $highscoresBody = $("#highscores-screen-body");
 const $goBackBtn = $("#go-back-button");
 const $clearBtn = $("#clear-button");
 
- let totalTime = 120;
- let quizTime = 0;
+// Set time
+let totalTime = 120;
+let quizTime = 0;
 
- let correct = 0;
- let wrong = 0;
+// Set score
+let correct = 0;
+let wrong = 0;
 
 function quizGame() {
 
+    // Initialized web browser for main buttons with onclick events
     function initialize() {
         $(document).ready(function() {
             $startBtn.on("click", startQuiz);
@@ -33,6 +37,7 @@ function quizGame() {
     });
     };
 
+    // Starts Quiz
     function startQuiz() {
         $startScreenTitle.hide();
         $startScreen.hide();
@@ -45,6 +50,7 @@ function quizGame() {
         timerInterval();
     };
 
+    // Displays each question/choices
     function showQuestions() {
         const question = questions.shift();
         const questionTitle = $(`<div class="card-header">
@@ -67,6 +73,7 @@ function quizGame() {
         $questionCard.append(choicesList);
     };
 
+    // Right vs Wrong button-choice for each question
     function manageAnswerClick(event, answer) {
         event.preventDefault();
 
@@ -101,6 +108,7 @@ function quizGame() {
         }
     };
 
+    // Timer 
     function timerInterval() {
         if (totalTime === 0) {
             endQuiz();
@@ -112,12 +120,14 @@ function quizGame() {
         }
     };
 
+    // End Quiz
     function endQuiz() {
         showEndScore();
         const $submitBtn = $("#end-screen-submit");
         $submitBtn.on("click", manageInputSubmit);
     };
 
+    // Displays Game Over screen with Scores
     function showEndScore() {
         $questionScreen.hide();
         $timer.hide();
@@ -146,6 +156,7 @@ function quizGame() {
         $endCard.prepend(endScoreCard);
     }
 
+    // Submit Form Event
     function manageInputSubmit(event) {
         event.preventDefault();
 
@@ -163,6 +174,7 @@ function quizGame() {
         showRankings(player);        
     };
 
+    // Displays Rankings
     function showRankings(currentPlayer = {}) {
         const playersArr = JSON.parse(localStorage.getItem("playersArr"));
         
@@ -184,6 +196,7 @@ function quizGame() {
 
     };
 
+    // Displays Rankings from View Highscores Button
     function viewRankings() {
             $startScreenTitle.hide();
             $startScreen.hide();
@@ -195,6 +208,7 @@ function quizGame() {
             showRankings();
     };
 
+    // Prioritizes Higher Scores in Leaderboard
     function sortArray(arr) {
         arr.sort((a,b) => {
             const scoreA = a.score;
@@ -211,6 +225,7 @@ function quizGame() {
         });
     };
 
+    // Local Storage Save
     function localStorageSave(player) {
         if (localStorage.getItem("playersArr") === null) {
             const playersArr = [];
@@ -224,10 +239,12 @@ function quizGame() {
         }
     };
 
+    // Go Back Button
     function goBackStart() {
         window.location.href = "./index.html";
     };
 
+    // Clear Highscores Button
     function clearScores() {
         localStorage.clear();
         $highscoresBody.empty();
@@ -238,6 +255,7 @@ function quizGame() {
 
 quizGame();
 
+// Background Images
 const imagesArr = [
     "./assets/images/Background-Bloodborne.jpg",
     "./assets/images/Background-Call-of-Duty-MW2.jpg",
@@ -260,6 +278,7 @@ const $wrapper = $(".wrapper")
 let nextImage = 0;
 doSlideShow();
 
+// Continuous transition between images
 function doSlideShow() {
     if (nextImage >= imagesArr.length) {
         nextImage = 0;
