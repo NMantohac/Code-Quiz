@@ -1,8 +1,8 @@
 # Homework_4
 
 URL Links:
-  1) https://github.com/NMantohac/Homework_4
-  2) https://nmantohac.github.io/Homework_4/
+  1) https://github.com/NMantohac/Homework_4_Code_Quiz
+  2) https://nmantohac.github.io/Homework_4_Code_Quiz/
   
 Description:
   - A videogame quiz that contains questions regarding to general videogame knowledge and specific titles/series. After the 'Start Quiz'
